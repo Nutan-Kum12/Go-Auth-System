@@ -10,9 +10,11 @@ import (
 	"Auth/services"
 
 	"github.com/gin-gonic/gin"
+	// "github.com/joho/godotenv"
 )
 
 func main() {
+	config.LoadEnv()
 	config.ConnectDB()
 
 	//repository

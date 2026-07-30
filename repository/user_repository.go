@@ -30,8 +30,8 @@ func (m MongoRepository) SaveUser(user model.User) error {
 	return err
 }
 func (m MongoRepository) FindUserByEmail(email string) (model.User, error) {
-	var user model.User
-	collection := config.DB.Collection("users")
+	var user model.User//declare a variable to store retrieved user document.
+	collection := config.DB.Collection("users")//Get a reference to the users collection
 	context, cancel := context.WithTimeout(
 		context.Background(),
 		5*time.Second,

@@ -11,9 +11,7 @@ func ValidateEmail(email string) bool {
 	//Standard regex for email validation
 	return regexp.MustCompile(regex).MatchString(email)
 }
-func ValidatePassword(
-	password string,
-) bool {
+func ValidatePassword(password string,) bool {
 
 	// minimum length
 	if len(password) < 8 {

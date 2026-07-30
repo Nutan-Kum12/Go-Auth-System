@@ -3,6 +3,7 @@ package config
 import (
 	"context"
 	"fmt"
+	"os"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -15,7 +16,8 @@ var DB *mongo.Database
 //later use in repository and service layer
 
 func ConnectDB() {
-	uri := "mongodb://localhost:27017"
+	uri := os.Getenv("MONGO_URI")
+	fmt.Println("Mongo URI:", uri)
 	ctx, cancel := context.WithTimeout(
 		context.Background(),
 		10*time.Second,
@@ -32,8 +34,12 @@ func ConnectDB() {
 	}
 	// ping database(to check mongo reachable or not)
 	err = client.Ping(ctx, nil)
+	if err != nil {
+		panic(err)
+	}
 	fmt.Println("MongoDB Connected")
 
-	// database select(check and create if not exists)
+	// database select
 	DB = client.Database("authDB")
+	fmt.Println("database created")
 }
